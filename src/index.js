@@ -1,16 +1,22 @@
+import cardExampleTpl from './temtlates/cards.hbs';
+import cards from './menu.json';
+console.log(cardExampleTpl(cards[0]));
+
+
+//настройка темы
+
 const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
 
-
 const radioBtnEl = document.querySelector('.theme-switch__track');
 const bodyEl = document.querySelector('body');
 const checkBoxEl = document.querySelector('#theme-switch-toggle');
-themeColor();
 
 radioBtnEl.addEventListener('click', onRadioBtnToggle);
 
+themeColor();
 
 function onRadioBtnToggle(evt) {
 
@@ -39,6 +45,12 @@ function themeColor() {
     
 };
 
+//Добавляет карточки
+const cardsContainer = document.querySelector('.js-menu');
+const cardsMarkup = createCardsMarkup(cards);
 
+function createCardsMarkup(cards) {
+    return cards.map(card => cardExampleTpl(card)).join('');
+ };
 
-
+cardsContainer.insertAdjacentHTML('afterbegin', cardsMarkup);
